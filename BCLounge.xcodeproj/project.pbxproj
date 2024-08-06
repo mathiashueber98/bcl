@@ -1,0 +1,680 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23740E2660BA005D17121AE1 /* Pods_BCLounge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA7D66E906B81083C40C2A5 /* Pods_BCLounge.framework */; };
+		849E99812C6241CF004AF98E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99802C6241CF004AF98E /* AppDelegate.swift */; };
+		849E99832C6241CF004AF98E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99822C6241CF004AF98E /* SceneDelegate.swift */; };
+		849E99852C6241CF004AF98E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99842C6241CF004AF98E /* ViewController.swift */; };
+		849E99882C6241CF004AF98E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 849E99872C6241CF004AF98E /* Base */; };
+		849E998A2C6241D1004AF98E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849E99892C6241D1004AF98E /* Assets.xcassets */; };
+		849E998D2C6241D1004AF98E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 849E998C2C6241D1004AF98E /* Base */; };
+		849E99962C624300004AF98E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 849E99952C624300004AF98E /* PrivacyInfo.xcprivacy */; };
+		849E99A32C624BCF004AF98E /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99A22C624BCF004AF98E /* ServiceView.swift */; };
+		849E99A52C624BD7004AF98E /* LoyaltyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99A42C624BD7004AF98E /* LoyaltyView.swift */; };
+		849E99A72C624BDF004AF98E /* LoungeReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99A62C624BDF004AF98E /* LoungeReservationsView.swift */; };
+		849E99A92C624BE8004AF98E /* PersonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99A82C624BE8004AF98E /* PersonDetailsView.swift */; };
+		849E99AB2C624BF2004AF98E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99AA2C624BF2004AF98E /* StorageManager.swift */; };
+		849E99AD2C624BFB004AF98E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99AC2C624BFB004AF98E /* DataManager.swift */; };
+		849E99AF2C624C03004AF98E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99AE2C624C03004AF98E /* NetworkManager.swift */; };
+		849E99B12C624C0E004AF98E /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99B02C624C0E004AF98E /* LocationListView.swift */; };
+		849E99B32C624C16004AF98E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99B22C624C16004AF98E /* MapView.swift */; };
+		849E99B52C624C1E004AF98E /* MakeReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99B42C624C1E004AF98E /* MakeReservationView.swift */; };
+		849E99B72C624C2D004AF98E /* LoungeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99B62C624C2D004AF98E /* LoungeCellView.swift */; };
+		849E99B92C624C38004AF98E /* UserCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99B82C624C38004AF98E /* UserCodeView.swift */; };
+		849E99BB2C624C41004AF98E /* Lounge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99BA2C624C41004AF98E /* Lounge.swift */; };
+		849E99BD2C624C49004AF98E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99BC2C624C49004AF98E /* User.swift */; };
+		849E99BF2C624C51004AF98E /* GamingNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99BE2C624C51004AF98E /* GamingNews.swift */; };
+		849E99C12C624C5B004AF98E /* LoungeReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99C02C624C5B004AF98E /* LoungeReservation.swift */; };
+		849E99C32C624C64004AF98E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99C22C624C64004AF98E /* Color.swift */; };
+		849E99C52C624C6D004AF98E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99C42C624C6D004AF98E /* View.swift */; };
+		849E99C72C624C77004AF98E /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99C62C624C77004AF98E /* Modifiers.swift */; };
+		849E99C92C624C83004AF98E /* TransparentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99C82C624C83004AF98E /* TransparentCardView.swift */; };
+		849E99CB2C624C8B004AF98E /* UserInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99CA2C624C8B004AF98E /* UserInfoCardView.swift */; };
+		849E99CD2C624C95004AF98E /* CustomBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99CC2C624C95004AF98E /* CustomBackgroundView.swift */; };
+		849E99CF2C624C9C004AF98E /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99CE2C624C9C004AF98E /* DividerView.swift */; };
+		849E99D12C624CA5004AF98E /* DragableLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99D02C624CA5004AF98E /* DragableLogo.swift */; };
+		849E99D32C624CB3004AF98E /* TabInitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99D22C624CB3004AF98E /* TabInitialView.swift */; };
+		849E99D52C624CBD004AF98E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99D42C624CBD004AF98E /* HomeView.swift */; };
+		849E99D72C624CC7004AF98E /* NewsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99D62C624CC7004AF98E /* NewsDetailsView.swift */; };
+		849E99D92C624CD1004AF98E /* GamingNewsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E99D82C624CD1004AF98E /* GamingNewsCellView.swift */; };
+		849E99DB2C625089004AF98E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849E99DA2C625088004AF98E /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0DA7D66E906B81083C40C2A5 /* Pods_BCLounge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BCLounge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D3B74286F4CD44635D63D17 /* Pods-BCLounge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BCLounge.release.xcconfig"; path = "Target Support Files/Pods-BCLounge/Pods-BCLounge.release.xcconfig"; sourceTree = "<group>"; };
+		849E997D2C6241CF004AF98E /* BCLounge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCLounge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		849E99802C6241CF004AF98E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		849E99822C6241CF004AF98E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		849E99842C6241CF004AF98E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		849E99872C6241CF004AF98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		849E99892C6241D1004AF98E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		849E998C2C6241D1004AF98E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		849E998E2C6241D1004AF98E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849E99942C6242D4004AF98E /* BCLounge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BCLounge.entitlements; sourceTree = "<group>"; };
+		849E99952C624300004AF98E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		849E99A22C624BCF004AF98E /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
+		849E99A42C624BD7004AF98E /* LoyaltyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyView.swift; sourceTree = "<group>"; };
+		849E99A62C624BDF004AF98E /* LoungeReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoungeReservationsView.swift; sourceTree = "<group>"; };
+		849E99A82C624BE8004AF98E /* PersonDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsView.swift; sourceTree = "<group>"; };
+		849E99AA2C624BF2004AF98E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		849E99AC2C624BFB004AF98E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		849E99AE2C624C03004AF98E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		849E99B02C624C0E004AF98E /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
+		849E99B22C624C16004AF98E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		849E99B42C624C1E004AF98E /* MakeReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeReservationView.swift; sourceTree = "<group>"; };
+		849E99B62C624C2D004AF98E /* LoungeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoungeCellView.swift; sourceTree = "<group>"; };
+		849E99B82C624C38004AF98E /* UserCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodeView.swift; sourceTree = "<group>"; };
+		849E99BA2C624C41004AF98E /* Lounge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lounge.swift; sourceTree = "<group>"; };
+		849E99BC2C624C49004AF98E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		849E99BE2C624C51004AF98E /* GamingNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingNews.swift; sourceTree = "<group>"; };
+		849E99C02C624C5B004AF98E /* LoungeReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoungeReservation.swift; sourceTree = "<group>"; };
+		849E99C22C624C64004AF98E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		849E99C42C624C6D004AF98E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		849E99C62C624C77004AF98E /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		849E99C82C624C83004AF98E /* TransparentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentCardView.swift; sourceTree = "<group>"; };
+		849E99CA2C624C8B004AF98E /* UserInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCardView.swift; sourceTree = "<group>"; };
+		849E99CC2C624C95004AF98E /* CustomBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackgroundView.swift; sourceTree = "<group>"; };
+		849E99CE2C624C9C004AF98E /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		849E99D02C624CA5004AF98E /* DragableLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragableLogo.swift; sourceTree = "<group>"; };
+		849E99D22C624CB3004AF98E /* TabInitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabInitialView.swift; sourceTree = "<group>"; };
+		849E99D42C624CBD004AF98E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		849E99D62C624CC7004AF98E /* NewsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailsView.swift; sourceTree = "<group>"; };
+		849E99D82C624CD1004AF98E /* GamingNewsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamingNewsCellView.swift; sourceTree = "<group>"; };
+		849E99DA2C625088004AF98E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F473891F9F6EEF814D758E27 /* Pods-BCLounge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BCLounge.debug.xcconfig"; path = "Target Support Files/Pods-BCLounge/Pods-BCLounge.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		849E997A2C6241CF004AF98E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23740E2660BA005D17121AE1 /* Pods_BCLounge.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B5ACB8F97B393A83F64C4CB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F473891F9F6EEF814D758E27 /* Pods-BCLounge.debug.xcconfig */,
+				3D3B74286F4CD44635D63D17 /* Pods-BCLounge.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		849E99742C6241CF004AF98E = {
+			isa = PBXGroup;
+			children = (
+				849E99952C624300004AF98E /* PrivacyInfo.xcprivacy */,
+				849E997F2C6241CF004AF98E /* BCLounge */,
+				849E997E2C6241CF004AF98E /* Products */,
+				1B5ACB8F97B393A83F64C4CB /* Pods */,
+				F1CA7BC6A7E30AA91EF8F867 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		849E997E2C6241CF004AF98E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				849E997D2C6241CF004AF98E /* BCLounge.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		849E997F2C6241CF004AF98E /* BCLounge */ = {
+			isa = PBXGroup;
+			children = (
+				849E99DA2C625088004AF98E /* GoogleService-Info.plist */,
+				849E99A12C624384004AF98E /* Main */,
+				849E99A02C62437D004AF98E /* Tab */,
+				849E999F2C624374004AF98E /* Components */,
+				849E999E2C62436C004AF98E /* Ext */,
+				849E999D2C624364004AF98E /* Model */,
+				849E999C2C62435E004AF98E /* QRView */,
+				849E999B2C624357004AF98E /*  Clubs */,
+				849E999A2C62434F004AF98E /* Service */,
+				849E99992C624349004AF98E /* UserDetail */,
+				849E99982C624334004AF98E /* ServiceView */,
+				849E99942C6242D4004AF98E /* BCLounge.entitlements */,
+				849E99972C624319004AF98E /* APP */,
+				849E99862C6241CF004AF98E /* Main.storyboard */,
+				849E99892C6241D1004AF98E /* Assets.xcassets */,
+				849E998B2C6241D1004AF98E /* LaunchScreen.storyboard */,
+				849E998E2C6241D1004AF98E /* Info.plist */,
+			);
+			path = BCLounge;
+			sourceTree = "<group>";
+		};
+		849E99972C624319004AF98E /* APP */ = {
+			isa = PBXGroup;
+			children = (
+				849E99802C6241CF004AF98E /* AppDelegate.swift */,
+				849E99822C6241CF004AF98E /* SceneDelegate.swift */,
+				849E99842C6241CF004AF98E /* ViewController.swift */,
+			);
+			path = APP;
+			sourceTree = "<group>";
+		};
+		849E99982C624334004AF98E /* ServiceView */ = {
+			isa = PBXGroup;
+			children = (
+				849E99A22C624BCF004AF98E /* ServiceView.swift */,
+				849E99A42C624BD7004AF98E /* LoyaltyView.swift */,
+				849E99A62C624BDF004AF98E /* LoungeReservationsView.swift */,
+			);
+			path = ServiceView;
+			sourceTree = "<group>";
+		};
+		849E99992C624349004AF98E /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				849E99A82C624BE8004AF98E /* PersonDetailsView.swift */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
+		849E999A2C62434F004AF98E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				849E99AA2C624BF2004AF98E /* StorageManager.swift */,
+				849E99AC2C624BFB004AF98E /* DataManager.swift */,
+				849E99AE2C624C03004AF98E /* NetworkManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		849E999B2C624357004AF98E /*  Clubs */ = {
+			isa = PBXGroup;
+			children = (
+				849E99B02C624C0E004AF98E /* LocationListView.swift */,
+				849E99B22C624C16004AF98E /* MapView.swift */,
+				849E99B42C624C1E004AF98E /* MakeReservationView.swift */,
+				849E99B62C624C2D004AF98E /* LoungeCellView.swift */,
+			);
+			path = " Clubs";
+			sourceTree = "<group>";
+		};
+		849E999C2C62435E004AF98E /* QRView */ = {
+			isa = PBXGroup;
+			children = (
+				849E99B82C624C38004AF98E /* UserCodeView.swift */,
+			);
+			path = QRView;
+			sourceTree = "<group>";
+		};
+		849E999D2C624364004AF98E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				849E99BA2C624C41004AF98E /* Lounge.swift */,
+				849E99BC2C624C49004AF98E /* User.swift */,
+				849E99BE2C624C51004AF98E /* GamingNews.swift */,
+				849E99C02C624C5B004AF98E /* LoungeReservation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		849E999E2C62436C004AF98E /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				849E99C22C624C64004AF98E /* Color.swift */,
+				849E99C42C624C6D004AF98E /* View.swift */,
+				849E99C62C624C77004AF98E /* Modifiers.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
+		849E999F2C624374004AF98E /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				849E99C82C624C83004AF98E /* TransparentCardView.swift */,
+				849E99CA2C624C8B004AF98E /* UserInfoCardView.swift */,
+				849E99CC2C624C95004AF98E /* CustomBackgroundView.swift */,
+				849E99CE2C624C9C004AF98E /* DividerView.swift */,
+				849E99D02C624CA5004AF98E /* DragableLogo.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		849E99A02C62437D004AF98E /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				849E99D22C624CB3004AF98E /* TabInitialView.swift */,
+			);
+			path = Tab;
+			sourceTree = "<group>";
+		};
+		849E99A12C624384004AF98E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				849E99D42C624CBD004AF98E /* HomeView.swift */,
+				849E99D62C624CC7004AF98E /* NewsDetailsView.swift */,
+				849E99D82C624CD1004AF98E /* GamingNewsCellView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F1CA7BC6A7E30AA91EF8F867 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DA7D66E906B81083C40C2A5 /* Pods_BCLounge.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		849E997C2C6241CF004AF98E /* BCLounge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 849E99912C6241D1004AF98E /* Build configuration list for PBXNativeTarget "BCLounge" */;
+			buildPhases = (
+				AF5163C18DDBABF468A56471 /* [CP] Check Pods Manifest.lock */,
+				849E99792C6241CF004AF98E /* Sources */,
+				849E997A2C6241CF004AF98E /* Frameworks */,
+				849E997B2C6241CF004AF98E /* Resources */,
+				CAE7F33D340F471B446B830A /* [CP] Embed Pods Frameworks */,
+				B051AFFF5257C0ED2D718F4C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BCLounge;
+			productName = BCLounge;
+			productReference = 849E997D2C6241CF004AF98E /* BCLounge.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		849E99752C6241CF004AF98E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					849E997C2C6241CF004AF98E = {
+						CreatedOnToolsVersion = 15.3;
+					};
+				};
+			};
+			buildConfigurationList = 849E99782C6241CF004AF98E /* Build configuration list for PBXProject "BCLounge" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 849E99742C6241CF004AF98E;
+			productRefGroup = 849E997E2C6241CF004AF98E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				849E997C2C6241CF004AF98E /* BCLounge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		849E997B2C6241CF004AF98E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849E998A2C6241D1004AF98E /* Assets.xcassets in Resources */,
+				849E998D2C6241D1004AF98E /* Base in Resources */,
+				849E99DB2C625089004AF98E /* GoogleService-Info.plist in Resources */,
+				849E99962C624300004AF98E /* PrivacyInfo.xcprivacy in Resources */,
+				849E99882C6241CF004AF98E /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AF5163C18DDBABF468A56471 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BCLounge-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B051AFFF5257C0ED2D718F4C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CAE7F33D340F471B446B830A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BCLounge/Pods-BCLounge-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		849E99792C6241CF004AF98E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				849E99D12C624CA5004AF98E /* DragableLogo.swift in Sources */,
+				849E99CD2C624C95004AF98E /* CustomBackgroundView.swift in Sources */,
+				849E99A32C624BCF004AF98E /* ServiceView.swift in Sources */,
+				849E99D32C624CB3004AF98E /* TabInitialView.swift in Sources */,
+				849E99BF2C624C51004AF98E /* GamingNews.swift in Sources */,
+				849E99C12C624C5B004AF98E /* LoungeReservation.swift in Sources */,
+				849E99BB2C624C41004AF98E /* Lounge.swift in Sources */,
+				849E99B32C624C16004AF98E /* MapView.swift in Sources */,
+				849E99C52C624C6D004AF98E /* View.swift in Sources */,
+				849E99B52C624C1E004AF98E /* MakeReservationView.swift in Sources */,
+				849E99C92C624C83004AF98E /* TransparentCardView.swift in Sources */,
+				849E99A72C624BDF004AF98E /* LoungeReservationsView.swift in Sources */,
+				849E99D92C624CD1004AF98E /* GamingNewsCellView.swift in Sources */,
+				849E99AF2C624C03004AF98E /* NetworkManager.swift in Sources */,
+				849E99852C6241CF004AF98E /* ViewController.swift in Sources */,
+				849E99CF2C624C9C004AF98E /* DividerView.swift in Sources */,
+				849E99D52C624CBD004AF98E /* HomeView.swift in Sources */,
+				849E99BD2C624C49004AF98E /* User.swift in Sources */,
+				849E99A92C624BE8004AF98E /* PersonDetailsView.swift in Sources */,
+				849E99C72C624C77004AF98E /* Modifiers.swift in Sources */,
+				849E99A52C624BD7004AF98E /* LoyaltyView.swift in Sources */,
+				849E99812C6241CF004AF98E /* AppDelegate.swift in Sources */,
+				849E99C32C624C64004AF98E /* Color.swift in Sources */,
+				849E99CB2C624C8B004AF98E /* UserInfoCardView.swift in Sources */,
+				849E99B12C624C0E004AF98E /* LocationListView.swift in Sources */,
+				849E99D72C624CC7004AF98E /* NewsDetailsView.swift in Sources */,
+				849E99832C6241CF004AF98E /* SceneDelegate.swift in Sources */,
+				849E99AD2C624BFB004AF98E /* DataManager.swift in Sources */,
+				849E99B92C624C38004AF98E /* UserCodeView.swift in Sources */,
+				849E99B72C624C2D004AF98E /* LoungeCellView.swift in Sources */,
+				849E99AB2C624BF2004AF98E /* StorageManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		849E99862C6241CF004AF98E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849E99872C6241CF004AF98E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		849E998B2C6241D1004AF98E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				849E998C2C6241D1004AF98E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		849E998F2C6241D1004AF98E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		849E99902C6241D1004AF98E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		849E99922C6241D1004AF98E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F473891F9F6EEF814D758E27 /* Pods-BCLounge.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BCLounge/BCLounge.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BCLounge/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BCLounge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		849E99932C6241D1004AF98E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D3B74286F4CD44635D63D17 /* Pods-BCLounge.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BCLounge/BCLounge.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BCLounge/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BCLounge;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		849E99782C6241CF004AF98E /* Build configuration list for PBXProject "BCLounge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849E998F2C6241D1004AF98E /* Debug */,
+				849E99902C6241D1004AF98E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		849E99912C6241D1004AF98E /* Build configuration list for PBXNativeTarget "BCLounge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				849E99922C6241D1004AF98E /* Debug */,
+				849E99932C6241D1004AF98E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 849E99752C6241CF004AF98E /* Project object */;
+}

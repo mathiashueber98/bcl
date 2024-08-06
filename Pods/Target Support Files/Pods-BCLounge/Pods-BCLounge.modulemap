@@ -1,0 +1,6 @@
+framework module Pods_BCLounge {
+  umbrella header "Pods-BCLounge-umbrella.h"
+
+  export *
+  module * { export * }
+}
