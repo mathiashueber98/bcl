@@ -1,17 +1,7 @@
-//
-//  MakeReservationView.swift
-//  BCLounge
-//
-//  Created by admin on 8/6/24.
-//
-
-
-
-
 import SwiftUI
+import MessageUI
 
 struct MakeReservationView: View {
-    
     var club: Lounge
     
     @Environment(\.dismiss) var dismiss
@@ -25,255 +15,197 @@ struct MakeReservationView: View {
     @State private var email = ""
 
     @State var user = User()
-    
-    @State var showMail = false
-        
-    
+    @State private var showMail = false
+
     var body: some View {
         ZStack {
             CustomBackgroundView()
             
             VStack {
-                
-                Text("Reservation")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(.white)
-                
-                HStack {
-                    Text(club.name ?? "")
-                        .padding(.top, 10)
-                        
-                    
-                    Spacer()
-                    
-                    Text(club.hours ?? "")
-                }
-                .foregroundColor(.white)
-                .padding(.bottom)
-                
-                DividerView()
-                
-                ScrollView {
-                    DatePicker("Date", selection: $date, in: Date()..., displayedComponents: [.date])
-                        .datePickerStyle(.compact)
-                        .tint(.white)
-                        .foregroundColor(.white)
-                        .colorMultiply(.white)
-                        .accentColor(.white)
-                        .padding(.vertical)
-                        .colorScheme(.dark)
-                    
-                    DividerView()
-                    
-                    DatePicker("Start time", selection: $time, displayedComponents: [.hourAndMinute])
-                        .datePickerStyle(.compact)
-                        .tint(.white)
-                        .foregroundColor(.white)
-                        .colorMultiply(.white)
-                        .accentColor(.white)
-                        .padding(.vertical)
-                        .colorScheme(.dark)
-                    
-                    DividerView()
-                    
-                    
-                    HStack {
-                        Text("Duration")
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                        Picker("Hour", selection: $selectedHour) {
-                            ForEach(1..<13, id: \.self) { hour in
-                                Text("\(hour)")
-                            }
-                        }
-                        .tint(.white)
-                        
-                    }
-                    .padding(.vertical)
-                    
-                    DividerView()
-                    
-                    HStack {
-                        Text("Players")
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                        Picker("Players", selection: $players) {
-                            ForEach(1..<9, id: \.self) { player in
-                                Text("\(player)")
-                            }
-                        }
-                        .tint(.white)
-                        
-                    }
-                    .padding(.vertical)
-
-                    
-                    DividerView()
-                    
-                    HStack {
-                        Text("Name")
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                        TextField("", text: $name)
-                            .frame(width: 100)
-                            .placeholder(when: name.isEmpty) {
-                                Text("Enter your name").foregroundColor(.gray)
-                            }
-                            .foregroundColor(.white)
-                            .tint(.white)
-                        
-                    }
-                    .padding(.vertical)
-                    
-                    DividerView()
-                    
-                    HStack {
-                        Text("Phone")
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                        TextField("", text: $number)
-                            .frame(width: 100)
-                            .placeholder(when: number.isEmpty) {
-                                Text("Phone Number").foregroundColor(.gray)
-                            }
-                            .foregroundColor(.white)
-                            .tint(.white)
-                        
-                    }
-                    .padding(.vertical)
-                    
-                    DividerView()
-                    
-                    HStack {
-                        Text("Email")
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                        TextField("", text: $email)
-                            .frame(width: 100)
-                            .placeholder(when: email.isEmpty) {
-                                Text("Your email").foregroundColor(.gray)
-                            }
-                            .foregroundColor(.white)
-                            .tint(.white)
-                        
-                    }
-                    .padding(.vertical)
-                    
-                    DividerView()
-                    
-                    VStack {
-                        HStack {
-                            Text("Preferred games | Addition Info")
-                                .foregroundColor(.white)
-                            Spacer()
-                        }
-                        
-                        TextEditor(text: $games)
-                            .foregroundStyle(.white)
-                            .padding(.horizontal)
-                            .frame(height: 200)
-                            .scrollContentBackgroundHidden()
-                            .background(Color.softBlue.cornerRadius(12))
-                            .tint(.white)
-                        
-                        Button {
-                         //   saveReserv()
-                            showMail.toggle()
-                        } label: {
-                            Text("Make a Reserve")
-                                .frame(width: 200, height: 40)
-                        }
-                        .tint(.lightPink)
-                        .buttonStyle(.borderedProminent)
-                        .padding(.vertical)
-                        
-                        VStack {
-                            
-                        }.frame(height: 300)
-                    }
-                    .padding(.vertical)
-                    
-                }
-                .hideScrollIndicator()
+                headerView
+                clubDetailsView
+                reservationForm
+                submitButton
             }
             .padding(.horizontal)
+            .hideScrollIndicator()
         }
-        .overlay {
-            VStack {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.white)
-                        
-                    }
-                    Spacer()
-                }
-                Spacer()
-            }
-            .padding(.top, 9)
-            .padding(.leading)
-        }
+        .overlay(closeButton, alignment: .topLeading)
         .sheet(isPresented: $showMail) {
-            MailComposeView(isShowing: $showMail, subject: "Reservation message", recipientEmail: "agnesschulz06@gmail.com", textBody: makeMessage()) { result, error in
-                switch result {
-                case .cancelled:
-                    print("Mail cancelled")
-                case .saved:
-                    print("Mail saved")
-                case .sent:
-                    print("Mail sent")
-                    dismiss()
-                case .failed:
-                    print("Mail failed: \(error?.localizedDescription ?? "Unknown error")")
-                @unknown default:
-                    print("Unknown result")
-                }
+            MailComposeView(isShowing: $showMail, subject: "Reservation message", recipientEmail: "agnesschulz06@gmail.com", textBody: makeMessage()) { result, _  in
+                handleMailResult(result: result)
             }
         }
         .onAppear {
-            user = StorageManager.shared.getUser()
-            
-            name = user.name
-            number = user.phone
-            email = user.email
+            loadUserData()
         }
     }
     
-    func prepareDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd"
-        
-        return dateFormatter.string(from: date)
+    private var headerView: some View {
+        Text("Reservation")
+            .font(.system(size: 28, weight: .bold))
+            .foregroundColor(.white)
     }
     
-    func prepareTime() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        
-        return dateFormatter.string(from: time)
+    private var clubDetailsView: some View {
+        HStack {
+            Text(club.name ?? "")
+                .padding(.top, 10)
+            
+            Spacer()
+            
+            Text(club.hours ?? "")
+        }
+        .foregroundColor(.white)
+        .padding(.bottom)
     }
     
-    func makeMessage() -> String {
-        
-        return """
-Club: \(club.name ?? "")
-Date: \(prepareDate())
-Start time: \(prepareTime())
-Durtation: \(selectedHour)
-Players: \(players)
-Name: \(name)
-Phone:  \(number)
-Email: \(email)
-Addition Info: \(games)
-"""
+    private var reservationForm: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                datePicker("Date", selection: $date, displayedComponents: [.date])
+                datePicker("Start time", selection: $time, displayedComponents: [.hourAndMinute])
+                
+                formPicker("Duration", selection: $selectedHour, options: 1..<13)
+                formPicker("Players", selection: $players, options: 1..<9)
+                
+                formTextField("Name", text: $name, placeholder: "Enter your name")
+                formTextField("Phone", text: $number, placeholder: "Phone Number")
+                formTextField("Email", text: $email, placeholder: "Your email")
+                
+                VStack(alignment: .leading) {
+                    Text("Preferred games | Additional Info")
+                        .foregroundColor(.white)
+                    
+                    TextEditor(text: $games)
+                        .foregroundColor(.white)
+                        .padding(.horizontal)
+                        .frame(height: 200)
+                        .background(Color.softBlue.cornerRadius(12))
+                        .scrollContentBackgroundHidden()
+                }
+                .padding(.vertical)
+            }
+            .padding(.vertical)
+        }
+    }
+    
+    private var submitButton: some View {
+        Button {
+            showMail.toggle()
+        } label: {
+            Text("Make a Reserve")
+                .frame(width: 200, height: 40)
+        }
+        .tint(.lightPink)
+        .buttonStyle(.borderedProminent)
+        .padding(.vertical)
+    }
+    
+    private var closeButton: some View {
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(.white)
+            }
+            Spacer()
+        }
+        .padding(.top, 9)
+        .padding(.leading)
+    }
+    
+    private func datePicker(_ title: String, selection: Binding<Date>, displayedComponents: DatePickerComponents) -> some View {
+        DatePicker(title, selection: selection, displayedComponents: displayedComponents)
+            .datePickerStyle(.compact)
+            .tint(.white)
+            .foregroundColor(.white)
+            .colorMultiply(.white)
+            .accentColor(.white)
+            .padding(.vertical)
+            .colorScheme(.dark)
+    }
+    
+    private func formPicker(_ title: String, selection: Binding<Int>, options: Range<Int>) -> some View {
+        HStack {
+            Text(title)
+                .foregroundColor(.white)
+            Spacer()
+            Picker(title, selection: selection) {
+                ForEach(options, id: \.self) { option in
+                    Text("\(option)")
+                }
+            }
+            .tint(.white)
+        }
+        .padding(.vertical)
+    }
+    
+    private func formTextField(_ title: String, text: Binding<String>, placeholder: String) -> some View {
+        HStack {
+            Text(title)
+                .foregroundColor(.white)
+            Spacer()
+            TextField("", text: text)
+                .frame(width: 100)
+                .placeholder(when: text.wrappedValue.isEmpty) {
+                    Text(placeholder).foregroundColor(.gray)
+                }
+                .foregroundColor(.white)
+                .tint(.white)
+        }
+        .padding(.vertical)
+    }
+    
+    private func handleMailResult(result: MFMailComposeResult) {
+        switch result {
+        case .cancelled:
+            print("Mail cancelled")
+        case .saved:
+            print("Mail saved")
+        case .sent:
+            print("Mail sent")
+            dismiss()
+        case .failed:
+            print("Mail failed")
+        @unknown default:
+            print("Unknown result")
+        }
+    }
+    
+    private func loadUserData() {
+        user = StorageManager.shared.getUser()
+        name = user.name
+        number = user.phone
+        email = user.email
+    }
+    
+    private func makeMessage() -> String {
+        """
+        Club: \(club.name ?? "")
+        Date: \(formatDate(date))
+        Start time: \(formatTime(time))
+        Duration: \(selectedHour) hour(s)
+        Players: \(players)
+        Name: \(name)
+        Phone: \(number)
+        Email: \(email)
+        Additional Info: \(games)
+        """
+    }
+    
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd"
+        return formatter.string(from: date)
+    }
+    
+    private func formatTime(_ time: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: time)
     }
 }
 

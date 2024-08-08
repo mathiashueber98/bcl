@@ -13,11 +13,11 @@ struct CustomBackgroundView: View {
             LinearGradient(
                 colors: [.darkRed, .darkBlue, .darkBlue],
                 startPoint: .top,
-                endPoint: .bottom)
+                endPoint: .bottom
+            )
             .ignoresSafeArea()
             
             GeometryReader { proxy in
-                
                 let size = proxy.size
                 
                 Color.softBlue
@@ -25,34 +25,33 @@ struct CustomBackgroundView: View {
                     .blur(radius: 200)
                     .ignoresSafeArea()
                 
-                Circle()
-                    .fill(Color.lightPink)
-                    .padding(50)
-                    .blur(radius: 120)
-                    .offset(x: -size.width / 1.8, y: -size.height / 5)
-                
-                Circle()
-                    .fill(Color.lightPink)
-                    .padding(50)
-                    .blur(radius: 150)
-                    .offset(x: size.width / 1.8, y: -size.height / 2)
-                
-                
-                Circle()
-                    .fill(Color.softBlue)
-                    .padding(50)
-                    .blur(radius: 90)
-                    .offset(x: size.width / 1.8, y: size.height / 2)
-                
-                
-                Circle()
-                    .fill(Color.softBlue)
-                    .padding(100)
-                    .blur(radius: 110)
-                    .offset(x: size.width / 1.8, y: 550)
-                
+                ForEach(backgroundCircles(size: size), id: \.id) { circle in
+                    Circle()
+                        .fill(circle.color)
+                        .padding(circle.padding)
+                        .blur(radius: circle.blur)
+                        .offset(x: circle.offsetX, y: circle.offsetY)
+                }
             }
         }
+    }
+    
+    private func backgroundCircles(size: CGSize) -> [CircleProperties] {
+        return [
+            CircleProperties(color: .lightPink, padding: 50, blur: 120, offsetX: -size.width / 1.8, offsetY: -size.height / 5),
+            CircleProperties(color: .lightPink, padding: 50, blur: 150, offsetX: size.width / 1.8, offsetY: -size.height / 2),
+            CircleProperties(color: .softBlue, padding: 50, blur: 90, offsetX: size.width / 1.8, offsetY: size.height / 2),
+            CircleProperties(color: .softBlue, padding: 100, blur: 110, offsetX: size.width / 1.8, offsetY: 550)
+        ]
+    }
+    
+    private struct CircleProperties {
+        let id = UUID()
+        let color: Color
+        let padding: CGFloat
+        let blur: CGFloat
+        let offsetX: CGFloat
+        let offsetY: CGFloat
     }
 }
 

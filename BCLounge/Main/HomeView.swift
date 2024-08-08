@@ -9,10 +9,9 @@ class HomeViewModel: ObservableObject {
 
 
 struct HomeView: View {
-    
     var completion: () -> ()
     @StateObject private var vm = HomeViewModel()
-    @State var news: [GamingNews] = []
+    @State private var news: [GamingNews] = []
     
     var body: some View {
         NavigationView {
@@ -20,63 +19,44 @@ struct HomeView: View {
                 CustomBackgroundView()
                 
                 VStack(spacing: 20) {
-                    UserInfoCardView() {
+                    UserInfoCardView {
                         vm.isProfileShown.toggle()
                     }
                     
-                    VStack {
-                        ScrollView {
-                            HStack {
-                                Text("Club News:")
-                                    .font(.system(size: 28, weight: .black))
-                                    .foregroundColor(.white)
-                                Spacer()
-                            }
-                            .padding(.leading, 25)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("Club News:")
+                                .font(.system(size: 28, weight: .black))
+                                .foregroundColor(.white)
+                                .padding(.leading, 25)
                             
-                            
-                            ForEach(news, id: \.self) { news in
-                                NavigationLink {
-                                    NewsDetailsView(news: news) {
-                                        completion()
-                                    }
-                                        .navigationBarBackButtonHidden()
-                                } label: {
-                                    GamingNewsCellView(image: news.image, header: news.header)
+                            ForEach(news, id: \.self) { newsItem in
+                                NavigationLink(destination: NewsDetailsView(news: newsItem, completion: completion)
+                                    .navigationBarBackButtonHidden()) {
+                                    GamingNewsCellView(image: newsItem.image, header: newsItem.header)
                                 }
-
                             }
                         }
-                        .cornerRadius(34, corners: [.bottomLeft, .bottomRight])
-                        .padding(.bottom, screenSize().height > 736 ? 20 : 50)
                         .hideScrollIndicator()
                     }
+                    .padding(.bottom, screenSize().height > 736 ? 40 : 50)
                     
                     Spacer()
                 }
-               
             }
-            //MARK: - NavBar
             .modifier(NavBarBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    HStack {
-                        VStack {
-                            HStack(spacing: 0) {
-                                
-                                Image("crown")
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                                
-                                Text("Bluechip Lounge")
-                                    .font(.system(size: 28, weight: .black))
-                                    .foregroundColor(Color.white)
-                                   
-                                Spacer()
-                            }
-                            
-                        }
+                    HStack(spacing: 0) {
+                        Image("crown")
+                            .resizable()
+                            .frame(width: 45, height: 45)
+                        
+                        Text("Bluechip Lounge")
+                            .font(.system(size: 28, weight: .black))
+                            .foregroundColor(.white)
+                        
                         Spacer()
                     }
                     .ignoresSafeArea()
@@ -86,12 +66,10 @@ struct HomeView: View {
         .fullScreenCover(isPresented: $vm.isProfileShown) {
             PersonDetailsView()
         }
-        .onAppear {
-           getNews()
-        }
+        .onAppear(perform: fetch)
     }
     
-    func getNews() {
+    private func fetch() {
         NetworkManager.shared.fetchNews { result in
             switch result {
             case .success(let data):
@@ -102,6 +80,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 #Preview {
     TabInitialView()

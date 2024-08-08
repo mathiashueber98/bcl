@@ -9,59 +9,51 @@
 
 import SwiftUI
 
+
 struct LoungeReservationsView: View {
     
     var completion: () -> ()
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 CustomBackgroundView()
                 
-                VStack {
-                    VStack(spacing: 60) {
-                        Text("Whoops, You don't have any reserves yet.")
-                            .font(.system(size: 25))
-                        
-                        Image(systemName: "gamecontroller")
-                            .font(.system(size: 150))
-                        
-                        Text("It's time to make it to the home screen.")
-                            .font(.system(size: 25))
-                    }
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.gray.opacity(0.5))
-                    .padding(.horizontal, 30)
+                VStack(spacing: 60) {
+                    Text("Whoops, You don't have any reserves yet.")
+                        .font(.system(size: 25, weight: .medium))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray.opacity(0.5))
+                        .padding(.horizontal, 30)
+                    
+                    Image(systemName: "gamecontroller")
+                        .font(.system(size: 150))
+                        .foregroundColor(.gray.opacity(0.5))
+                    
+                    Text("It's time to make it to the home screen.")
+                        .font(.system(size: 25, weight: .medium))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray.opacity(0.5))
+                        .padding(.horizontal, 30)
                 }
+                .padding(.top, 50)
             }
-            //MARK: - NavBar
+            .navigationBarBackButtonHidden()
             .modifier(NavBarBackground())
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Reservations")
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    HStack(spacing: 10) {
-                        
-                        Button {
-                            completion()
-                            dismiss()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(.white)
-                        }
-                        
-                        Spacer()
-                    }
-                    .overlay {
-                        Text("Reservations")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        completion()
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
                             .foregroundColor(.white)
-                            .font(.system(size: 32, weight: .bold))
                     }
-                    .ignoresSafeArea()
                 }
             }
         }
-        .navigationBarBackButtonHidden()
         .onAppear {
             completion()
         }
@@ -69,5 +61,7 @@ struct LoungeReservationsView: View {
 }
 
 #Preview {
-    LoungeReservationsView(){}
+    LoungeReservationsView() {}
 }
+
+

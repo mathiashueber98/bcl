@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+
 struct RanksView: View {
     
     @Environment(\.dismiss) var dismiss
@@ -19,103 +20,35 @@ struct RanksView: View {
             ZStack {
                 CustomBackgroundView()
                 
-                VStack {
-                    
+                VStack(spacing: 10) {
                     Text("Bluechip offers its users the chance to join the loyalty program and level up. Learn more below.")
                         .padding(.horizontal)
                         .padding(.top)
                         .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
                     
-                    VStack {
-                        ScrollView {
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: screenSize().width / 1.1, height: 220)
-                                .foregroundColor(.semiBlue)
-                                .overlay {
-                                    HStack {
-                                        DragableLogo(image: "logoBlue")
-                                        
-                                        Spacer()
-                                        
-                                        VStack {
-                                            Text("Rank B")
-                                                .font(.system(size: 22, weight: .regular, design: .monospaced))
-                                                .foregroundColor(.white)
-                                                .padding(.bottom)
-                                            
-                                            Text("Receive a 5% Discount on Room Rentals Starting from the First Hour")
-                                                .foregroundColor(.white)
-                                        }
-                                        .frame(width: 200)
-                                    }
-                                    .padding(.horizontal, 30)
-                                }
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: screenSize().width / 1.1, height: 250)
-                                .padding(.vertical, 10)
-                                .foregroundColor(.semiBlue)
-                                .overlay {
-                                    HStack {
-                                        DragableLogo(image: "logo")
-                                        
-                                        Spacer()
-                                        
-                                        VStack {
-                                            Text("Rank A")
-                                                .font(.system(size: 22, weight: .regular, design: .monospaced))
-                                                .foregroundColor(.white)
-                                                .padding(.bottom)
-                                            
-                                            Text("Receive a 10% Discount. \nAbility to save your progress in story games.")
-                                                .foregroundColor(.white)
-                                        }
-                                        .frame(width: 200)
-                                    }
-                                    .padding(.horizontal, 30)
-                                }
-                            
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: screenSize().width / 1.1, height: 250)
-                                .foregroundColor(.semiBlue)
-                                .overlay {
-                                    HStack {
-                                        DragableLogo(image: "logoYellow")
-                                        
-                                        Spacer()
-                                        
-                                        VStack {
-                                            Text("Rank S")
-                                                .font(.system(size: 22, weight: .regular, design: .monospaced))
-                                                .foregroundColor(.white)
-                                                .padding(.bottom)
-                                            
-                                            Text("Receive a 15% Discount. \nAll previous improvements + the ability to participate in game draws, as well as access to special events.")
-                                                .foregroundColor(.white)
-                                        }
-                                        .frame(width: 200)
-                                    }
-                                    .padding(.horizontal, 30)
-                                }
-                            
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            RankCard(rank: "B", description: "Receive a 5% Discount on Room Rentals Starting from the First Hour", image: "logoBlue")
+                            RankCard(rank: "A", description: "Receive a 10% Discount.\nAbility to save your progress in story games.", image: "logo")
+                            RankCard(rank: "S", description: "Receive a 15% Discount.\nAll previous improvements + the ability to participate in game draws, as well as access to special events.", image: "logoYellow")
                         }
+                        .padding(.horizontal)
                         .hideScrollIndicator()
                     }
                     
                     Spacer()
                 }
             }
+            .navigationBarBackButtonHidden()
             .onAppear {
                 completion()
             }
-            //MARK: - NavBar
             .modifier(NavBarBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack(spacing: 10) {
-                        
                         Button {
                             completion()
                             dismiss()
@@ -125,11 +58,11 @@ struct RanksView: View {
                         }
                         
                         Spacer()
-                    }
-                    .overlay {
+                        
                         Text("Loyalty")
                             .foregroundColor(.white)
                             .font(.system(size: 32, weight: .bold))
+                        Spacer()
                     }
                     .ignoresSafeArea()
                 }
@@ -138,6 +71,41 @@ struct RanksView: View {
     }
 }
 
-#Preview {
-    RanksView(){}
+struct RankCard: View {
+    let rank: String
+    let description: String
+    let image: String
+    
+    var body: some View {
+        RoundedRectangle(cornerRadius: 12)
+            .fill(Color.semiBlue)
+            .overlay {
+                HStack {
+                    DragableLogo(image: image)
+                        .offset(x: 20)
+
+                    Spacer()
+                    
+                    VStack(alignment: .leading) {
+                        Text("Rank \(rank)")
+                            .font(.system(size: 22, weight: .regular, design: .monospaced))
+                            .foregroundColor(.white)
+                            .padding(.bottom)
+                        
+                        Text(description)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .frame(width: 200, alignment: .leading)
+                    .padding(.horizontal, 30)
+                }
+                .padding(.horizontal, 30)
+            }
+            .frame(height: 200)
+    }
 }
+
+#Preview {
+    RanksView() {}
+}
+

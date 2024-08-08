@@ -10,66 +10,50 @@
 import SwiftUI
 
 struct UserInfoCardView: View {
-    
     var completion: () -> ()
-    @State var level = "B"
-    @State var name = "Gamer"
+    @State private var level = "B"
+    @State private var name = "Gamer"
     
     var body: some View {
         TransparentCardView(colors: [.red, Color.darkRed.opacity(0.5), Color.darkRed])
             .frame(width: screenSize().width / 1.1, height: 220)
             .overlay {
                 HStack {
-                    
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("Welcome ")
-                            .multilineTextAlignment(.center)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Welcome \(name)!")
                             .font(.system(size: 20, weight: .black))
-                            .foregroundColor(Color.white)
-                        
-                        Text("\(name)!")
-                            .multilineTextAlignment(.center)
-                            .font(.system(size: 20, weight: .black))
-                            .foregroundColor(Color.white)
-                            
+                            .foregroundColor(.white)
                         
                         Spacer()
                         
                         HStack {
                             Image(systemName: "trophy.fill")
-                            Text("Rank:")
-                            Text(level)
+                            Text("Rank: \(level)")
                         }
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
                         
                         Spacer()
                         
-                        Button {
-                            completion()
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .frame(height: 50)
-                                    .foregroundColor(.darkRed.opacity(0.4))
-                                Text("View Profile")
-                                    .foregroundColor(.white)
-                            }
-                            
+                        Button(action: completion) {
+                            RoundedRectangle(cornerRadius: 12)
+                                .frame(height: 50)
+                                .foregroundColor(.darkRed.opacity(0.4))
+                                .overlay {
+                                    Text("View Profile")
+                                        .foregroundColor(.white)
+                                }
                         }
                         
                         Spacer()
                     }
-                    .padding(.top, 40)
-                    .padding(.leading)
+                    .frame(width: 175)
+                    .padding([.top, .leading], 40)                    
                     
-                    
-                    Spacer()
-
                     DragableLogo(image: "logoBlue")
                         .glow(.lightPink, radius: 5)
-                        .padding(.trailing, 20)
                 }
+                .padding(.trailing, 30)
                 .onAppear {
                     name = UserDefaults.standard.string(forKey: "name") ?? "Gamer"
                 }

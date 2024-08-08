@@ -10,6 +10,8 @@
 
 import SwiftUI
 
+import Foundation
+
 enum CustomError: Error {
     case invalidUrl
     case invalidData
@@ -23,18 +25,17 @@ class NetworkManager {
         case news = "https://api.jsonserve.com/4pUNSv"
     }
     
-    static var shared = NetworkManager()
+    static let shared = NetworkManager()
     
-    private init(){}
+    private init() {}
     
-    func fetchNews(completion: @escaping (Result<[GamingNews], Error>) -> Void) {
-                        
-        guard let url = URL(string: URLS.news.rawValue) else {
+    private func fetchData(from urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: urlString) else {
             completion(.failure(CustomError.invalidUrl))
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -50,49 +51,41 @@ class NetworkManager {
                 return
             }
             
-            do {
-                let activities = try JSONDecoder().decode([GamingNews].self, from: data)
-                completion(.success(activities))
-            } catch {
+            completion(.success(data))
+        }.resume()
+    }
+    
+    func fetchNews(completion: @escaping (Result<[GamingNews], Error>) -> Void) {
+        fetchData(from: URLS.news.rawValue) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let news = try JSONDecoder().decode([GamingNews].self, from: data)
+                    completion(.success(news))
+                } catch {
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
-        
-        task.resume()
     }
     
     func fetchClubs(completion: @escaping (Result<[Lounge], Error>) -> Void) {
-                        
-        guard let url = URL(string: URLS.clubs.rawValue) else {
-            completion(.failure(CustomError.invalidUrl))
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                completion(.failure(CustomError.invalidResponse))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(CustomError.invalidData))
-                return
-            }
-            
-            do {
-                let activities = try JSONDecoder().decode([Lounge].self, from: data)
-                completion(.success(activities))
-            } catch {
+        fetchData(from: URLS.clubs.rawValue) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let clubs = try JSONDecoder().decode([Lounge].self, from: data)
+                    completion(.success(clubs))
+                } catch {
+                    completion(.failure(error))
+                }
+                
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
-        
-        task.resume()
     }
-
 }

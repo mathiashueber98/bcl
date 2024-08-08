@@ -1,26 +1,15 @@
-//
-//  PersonDetailsView.swift
-//  BCLounge
-//
-//  Created by admin on 8/6/24.
-//
-
-
-
-
 import SwiftUI
 
 struct PersonDetailsView: View {
     
-    @StateObject var vm = UserInfoViewModel()
-    @Environment(\.dismiss) var dismiss
+    @StateObject private var vm = UserInfoViewModel()
+    @Environment(\.dismiss) private var dismiss
     
-    @State var name = ""
-    @State var surName = ""
-    @State var email = ""
-    @State var birthday = ""
-    @State var number = ""
-    @State var selectedImage = ""
+    @State private var name = ""
+    @State private var surName = ""
+    @State private var email = ""
+    @State private var birthday = ""
+    @State private var number = ""
     
     var body: some View {
         NavigationView {
@@ -29,57 +18,13 @@ struct PersonDetailsView: View {
                 
                 ScrollView {
                     VStack(spacing: 25) {
+                        formField(title: "Name", text: $name)
+                        formField(title: "Surname", text: $surName)
+                        formField(title: "Email", text: $email)
+                        formField(title: "Birthday", text: $birthday)
+                        formField(title: "Phone Number", text: $number)
                         
-                        TextField("", text: $name)
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.white)
-                            .placeholder(when: name.isEmpty) {
-                                Text("Name").foregroundColor(.gray)
-                            }
-                        
-                        DividerView()
-                        
-                        TextField("", text: $surName)
-                            .foregroundColor(.white)
-                            .font(.system(size: 22, weight: .bold))
-                            .placeholder(when: surName.isEmpty) {
-                                Text("Surname").foregroundColor(.gray)
-                            }
-                        
-                        DividerView()
-                        
-                        TextField("", text: $email)
-                            .foregroundColor(.white)
-                            .font(.system(size: 22, weight: .bold))
-                            .placeholder(when: email.isEmpty) {
-                                Text("Email").foregroundColor(.gray)
-                            }
-                        
-                        DividerView()
-                        
-                        TextField("", text: $birthday)
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.white)
-                            .placeholder(when: birthday.isEmpty) {
-                                Text("Birthday").foregroundColor(.gray)
-                            }
-                        
-                        DividerView()
-                        
-                        TextField("", text: $number)
-                            .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(.white)
-                            .placeholder(when: number.isEmpty) {
-                                Text("Phone Number").foregroundColor(.gray)
-                            }
-                        
-                        DividerView()
-
-                        
-                        Button {
-                            StorageManager.shared.updateUser(name: name, surname: surName, email: email, birthday: birthday, number: number)
-                            dismiss()
-                        } label: {
+                        Button(action: saveUser) {
                             Text("Save")
                                 .frame(width: 200, height: 50)
                         }
@@ -87,55 +32,60 @@ struct PersonDetailsView: View {
                         .buttonStyle(.borderedProminent)
                         .tint(.lightPink)
                     }
-                    
                     .padding(.horizontal)
                 }
                 .padding(.top, 50)
             }
-            //MARK: - NavBar
             .modifier(NavBarBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack(spacing: 10) {
-                        
                         Spacer()
-                        
                         Text("User Details")
                             .font(.system(size: 28, weight: .black))
-                            .foregroundColor(Color.white)
+                            .foregroundColor(.white)
                             .padding(.trailing)
                             .frame(width: screenSize().width)
-
-                        
                         Spacer()
                     }
-                    .overlay {
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.leading, 25)
-                            
-                            Spacer()
-                        }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: dismiss.callAsFunction) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.white)
                     }
-                    .ignoresSafeArea()
-                    
+                    .padding(.leading, 25)
                 }
             }
         }
-        .onAppear {
-            vm.fetchUser()
-            
-            name = vm.user.name
-            surName = vm.user.surname
-            email = vm.user.email
-            birthday = vm.user.birthday
-            number = vm.user.phone
+        .onAppear(perform: loadUser)
+    }
+    
+    private func loadUser() {
+        vm.fetchUser()
+        
+        name = vm.user.name
+        surName = vm.user.surname
+        email = vm.user.email
+        birthday = vm.user.birthday
+        number = vm.user.phone
+    }
+    
+    private func saveUser() {
+        StorageManager.shared.updateUser(name: name, surname: surName, email: email, birthday: birthday, number: number)
+        dismiss()
+    }
+    
+    private func formField(title: String, text: Binding<String>) -> some View {
+        VStack {
+            TextField("", text: text)
+                .font(.system(size: 22, weight: .bold))
+                .foregroundColor(.white)
+                .placeholder(when: text.wrappedValue.isEmpty) {
+                    Text(title).foregroundColor(.gray)
+                }
+            DividerView()
         }
     }
 }
@@ -144,11 +94,9 @@ struct PersonDetailsView: View {
     PersonDetailsView()
 }
 
-
 class UserInfoViewModel: ObservableObject {
     
     @Published var user = User()
-    
     
     func fetchUser() {
         user = StorageManager.shared.getUser()

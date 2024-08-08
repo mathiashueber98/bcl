@@ -11,14 +11,13 @@
 import SwiftUI
 
 struct LocationListView: View {
-        
-    @State var clubList: [Lounge] = []
-    @State var allClubs: [Lounge] = []
-
-    @State var isShown = false
-    @State var isMapShown = false
-    @State var isAlertShown = false
-    @State var offset = 1000
+    @State private var clubList: [Lounge] = []
+    @State private var allClubs: [Lounge] = []
+    
+    @State private var isShown = false
+    @State private var isMapShown = false
+    @State private var isAlertShown = false
+    @State private var offset: CGFloat = 1000
     
     var body: some View {
         NavigationView {
@@ -26,10 +25,9 @@ struct LocationListView: View {
                 CustomBackgroundView()
                 
                 VStack {
-                    
                     DividerView()
                         .padding(.top)
-                          
+                    
                     ScrollView {
                         VStack {
                             ForEach(clubList, id: \.name) { club in
@@ -38,12 +36,11 @@ struct LocationListView: View {
                                 } location: {
                                     isMapShown.toggle()
                                 } copy: {
-                                    isAlertShown.toggle()
                                     withAnimation {
                                         offset = 0
+                                        isAlertShown = true
                                     }
                                 }
-                                
                                 .fullScreenCover(isPresented: $isShown) {
                                     MakeReservationView(club: club)
                                 }
@@ -52,21 +49,16 @@ struct LocationListView: View {
                                 }
                             }
                             
-                            VStack {
-                                
-                            }
-                            .frame(height: 100)
+                            Spacer()
+                                .frame(height: 100)
                         }
-                       
                     }
-                    .padding(.bottom, screenSize().height > 736 ? 30 : 70)
+                    .padding(.bottom, screenSize().height > 736 ? 60 : 70)
                     .hideScrollIndicator()
                     
                     Spacer()
                 }
-                
             }
-            //MARK: - NavBar
             .modifier(NavBarBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -74,10 +66,8 @@ struct LocationListView: View {
                     HStack(spacing: 10) {
                         Text("Gaming Clubs")
                             .font(.system(size: 28, weight: .black))
-                            .foregroundColor(Color.white)
-                        
+                            .foregroundColor(.white)
                         Spacer()
-                        
                     }
                     .ignoresSafeArea()
                 }
@@ -85,49 +75,55 @@ struct LocationListView: View {
         }
         .overlay {
             if isAlertShown {
-                Rectangle()
-                    .frame(width: 300, height: 100)
-                    .cornerRadius(12)
-                    .foregroundColor(.gray)
-                    .shadow(radius: 10)
-                    .overlay {
-                        Text("The message has been copied to the clipboard.")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                    }
-                    .offset(y: CGFloat(offset))
+                alertOverlay
+                    .offset(y: offset)
                     .animation(.bouncy, value: isAlertShown)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                            withAnimation {
-                                offset = 1000
-                                isAlertShown.toggle()
-                            }
-                        }
+                        hideAlertAfterDelay()
                     }
             }
         }
         .onAppear {
-            NetworkManager.shared.fetchClubs { result in
-                switch result {
-                case .success(let clubs):
-                    allClubs = clubs
-                    clubList = allClubs
-
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            
-            
+            fetchClubs()
         }
     }
     
-    func filterClubs(byCountry country: String, from clubs: [Lounge]) -> [Lounge] {
-        return clubs.filter { $0.country == country }
+    private var alertOverlay: some View {
+        Rectangle()
+            .frame(width: 300, height: 100)
+            .cornerRadius(12)
+            .foregroundColor(.gray)
+            .shadow(radius: 10)
+            .overlay {
+                Text("The message has been copied to the clipboard.")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+            }
+    }
+    
+    private func fetchClubs() {
+        NetworkManager.shared.fetchClubs { result in
+            switch result {
+            case .success(let clubs):
+                allClubs = clubs
+                clubList = allClubs
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func hideAlertAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation {
+                offset = 1000
+                isAlertShown = false
+            }
+        }
     }
 }
 
+
 #Preview {
-    LocationListView()
+    TabInitialView()
 }

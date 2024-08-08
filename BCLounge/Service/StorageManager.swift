@@ -1,98 +1,80 @@
-//
-//  StorageManager.swift
-//  BCLounge
-//
-//  Created by admin on 8/6/24.
-//
-
-
-
-
-
 import SwiftUI
 import RealmSwift
-
 
 class StorageManager {
     
     static let shared = StorageManager()
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
     private init() {}
     
-    @ObservedResults(User.self) var users
-    @ObservedResults(LoungeReservation.self) var reservations
+    @ObservedResults(User.self) private var users
+    @ObservedResults(LoungeReservation.self) private var reservations
 
     func deleteAllData() {
         do {
             try realm.write {
                 realm.deleteAll()
             }
-        } catch let error as NSError {
-            print("\(error.localizedDescription)")
+        } catch {
+            print("Failed to delete all data: \(error.localizedDescription)")
         }
     }
     
     func createReservation(date: String, time: String, duration: String, players: String, additionInfo: String, name: String, number: String, email: String, club: String) {
-        let reserv = LoungeReservation()
-        reserv.date = date
-        reserv.time = time
-        reserv.selectedHour = duration
-        reserv.players = players
-        reserv.additionInfo = additionInfo
-        reserv.name = name
-        reserv.number = number
-        reserv.email = email
-        reserv.club = club
+        let reservation = LoungeReservation()
+        reservation.date = date
+        reservation.time = time
+        reservation.selectedHour = duration
+        reservation.players = players
+        reservation.additionInfo = additionInfo
+        reservation.name = name
+        reservation.number = number
+        reservation.email = email
+        reservation.club = club
         
-        try! realm.write {
-            realm.add(reserv)
+        do {
+            try realm.write {
+                realm.add(reservation)
+            }
+        } catch {
+            print("Failed to create reservation: \(error.localizedDescription)")
         }
     }
     
     func createUser() {
         let user = User()
         user.code = DataManager.shared.generateUserCode()
-        user.level = "1"
-        user.credits = 0
         
-        try! realm.write {
-            realm.add(user)
+        do {
+            try realm.write {
+                realm.add(user)
+            }
+        } catch {
+            print("Failed to create user: \(error.localizedDescription)")
         }
     }
     
     func getUser() -> User {
         let users = realm.objects(User.self)
-        if let user = users.first {
-            return user
-        } else {
-            return User()
-        }
-        
+        return users.first ?? User()
     }
     
     func updateUser(name: String, surname: String, email: String, birthday: String, number: String) {
         let users = realm.objects(User.self)
-        if let realmUser = users.first {
-            try! realm.write {
+        guard let realmUser = users.first else { return }
+        
+        do {
+            try realm.write {
                 realmUser.name = name
                 realmUser.surname = surname
                 realmUser.email = email
                 realmUser.birthday = birthday
                 realmUser.phone = number
             }
-            print("User updated")
-        }
-    }
-    
-    func updateUserScore(level: String, credits: Int) {
-        let users = realm.objects(User.self)
-        if let realmUser = users.first {
-            try! realm.write {
-                realmUser.level = level
-                realmUser.credits = credits
-            }
-            print("User updated")
+            print("User updated successfully")
+        } catch {
+            print("Failed to update user: \(error.localizedDescription)")
         }
     }
 }

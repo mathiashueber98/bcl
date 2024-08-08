@@ -23,7 +23,4 @@ class User: Object, ObjectKeyIdentifiable {
     @Persisted var phone: String = ""
     
     @Persisted var code: String = ""
-    @Persisted var level: String = "1 level"
-    @Persisted var credits: Int = 0
-
 }

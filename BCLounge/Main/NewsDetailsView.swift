@@ -11,22 +11,18 @@
 import SwiftUI
 
 struct NewsDetailsView: View {
-    
     @Environment(\.dismiss) var dismiss
-    
     var news: GamingNews
     var completion: () -> ()
-
     
     var body: some View {
         NavigationView {
             ZStack {
-                Rectangle()
-                    .foregroundColor(.darkBlue)
+                Color.darkBlue
                     .ignoresSafeArea()
                 
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 20) {
                         if let url = URL(string: news.image) {
                             AsyncImage(url: url) { image in
                                 image
@@ -42,54 +38,43 @@ struct NewsDetailsView: View {
                                     .frame(width: screenSize().width - 40, height: 250)
                             }
                         }
-                                                   
-                        VStack(alignment: .leading) {
+                        
+                        VStack(alignment: .leading, spacing: 16) {
                             Text(news.header)
                                 .foregroundColor(.white)
                                 .font(.system(size: 28, weight: .bold))
                             
                             Text(news.body)
-                                .padding(.top)
                                 .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .regular))
-                            
+                                .font(.system(size: 20))
                         }
                         .padding()
                         .background(Color.darkBlue.cornerRadius(12))
                         .offset(y: -30)
-                        
-                        
-                        Spacer()
                     }
+                    .padding(.horizontal)
                 }
                 .hideScrollIndicator()
             }
-            //MARK: - NavBar
             .modifier(NavBarBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    HStack(spacing: 10) {
-                        
-                        Button {
-                            completion()
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                                .foregroundColor(.white)
-                        }
-                                                        
-                        Spacer()
+                    Button(action: {
+                        completion()
+                        dismiss()
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.white)
                     }
-                
+                    .frame(width: screenSize().width, alignment: .leading)
                 }
             }
         }
-        .onAppear {
-            completion()
-        }
+        .onAppear(perform: completion)
     }
 }
+
 
 #Preview {
     NewsDetailsView(news: .MOCK){}

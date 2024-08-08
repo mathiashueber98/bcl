@@ -9,26 +9,28 @@
 
 import Foundation
 
+import Foundation
+
 class DataManager {
     static let shared = DataManager()
     
     private init() {}
     
     func createInitialData() {
-        if !UserDefaults.standard.bool(forKey: "initial") {
-            UserDefaults.standard.setValue(true, forKey: "initial")
-            StorageManager.shared.createUser()
-            print("Initial Created")
-        }
+        let isInitialCreated = UserDefaults.standard.bool(forKey: "initial")
+        guard !isInitialCreated else { return }
+        
+        UserDefaults.standard.setValue(true, forKey: "initial")
+        StorageManager.shared.createUser()
+        print("Initial data created")
     }
     
     func generateUserCode() -> String {
-        var randomNumbers = ""
-        for _ in 0..<4 {
-            let randomNumber = Int.random(in: 0...99)
-            randomNumbers += String(format: "%02d", randomNumber) + " "
-        }
-        randomNumbers.removeLast()
+        let randomNumbers = (0..<4).map { _ in
+            String(format: "%02d", Int.random(in: 0...99))
+        }.joined(separator: " ")
+        
         return randomNumbers
     }
 }
+

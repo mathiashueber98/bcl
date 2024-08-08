@@ -15,18 +15,15 @@ struct TabInitialView: View {
         UITabBar.appearance().isHidden = true
     }
     
-    @State private var current = "Home"
+    @State private var currentTab = "Home"
     @State private var isTabBarShown = true
     
     var body: some View {
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+        ZStack(alignment: .bottom) {
             
-            TabView(selection: $current) {
-                
-                HomeView() {
-                    isTabBarShown.toggle()
-                }
-                .tag("Home")
+            TabView(selection: $currentTab) {
+                HomeView { toggleTabBar() }
+                    .tag("Home")
                 
                 LocationListView()
                     .tag("Clubs")
@@ -34,42 +31,39 @@ struct TabInitialView: View {
                 UserCodeView()
                     .tag("QR")
                 
-                ServiceView() {
-                    isTabBarShown.toggle()
-                }
+                ServiceView { toggleTabBar() }
                     .tag("Service")
             }
             
             if isTabBarShown {
-                
-                HStack(spacing: 0) {
-                    TabButton(title: "Home", image: "house", selected: $current)
+                tabBar
+                    .padding(.horizontal, 25)
+                    .padding(.bottom, screenSize().height > 736 ? -10 : 0)
                     
-                    Spacer(minLength: 0)
-                    
-                    TabButton(title: "Clubs", image: "gamecontroller", selected: $current)
-                    
-                    Spacer(minLength: 0)
-                    
-                    TabButton(title: "QR", image: "qrcode", selected: $current)
-                    
-                    Spacer(minLength: 0)
-                    
-                    TabButton(title: "Service", image: "wrench.adjustable", selected: $current)
-                }
-                .padding(.horizontal)
-                
-                .padding(.horizontal, 25)
-                .padding(.bottom, 5)
             }
-            
         }
         .onAppear {
             DataManager.shared.createInitialData()
         }
-        .ignoresSafeArea()
+    }
+    
+    private var tabBar: some View {
+        HStack(spacing: 0) {
+            TabButton(title: "Home", image: "house", selected: $currentTab)
+            Spacer()
+            TabButton(title: "Clubs", image: "gamecontroller", selected: $currentTab)
+            Spacer()
+            TabButton(title: "QR", image: "qrcode", selected: $currentTab)
+            Spacer()
+            TabButton(title: "Service", image: "wrench.adjustable", selected: $currentTab)
+        }
+    }
+    
+    private func toggleTabBar() {
+        isTabBarShown.toggle()
     }
 }
+
 
 #Preview {
     TabInitialView()
@@ -79,24 +73,18 @@ struct TabInitialView: View {
 struct TabButton: View {
     var title: String
     var image: String
-    
     @Binding var selected: String
     
     var body: some View {
-        Button {
-            withAnimation(.spring) {
-                selected = title
-            }
-        } label: {
+        Button(action: selectTab) {
             VStack(spacing: 10) {
                 Image(systemName: image)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 25, height: 25)
                 
-                if selected == title {
+                if isSelected {
                     Text(title)
-                    
                 }
             }
             .foregroundColor(.white)
@@ -104,10 +92,20 @@ struct TabButton: View {
             .padding(.horizontal)
             .background(
                 Rectangle()
-                    .fill(Color.white.opacity(selected == title ? 0.08 : 0))
+                    .fill(Color.white.opacity(isSelected ? 0.08 : 0))
                     .frame(width: 100)
                     .cornerRadius(18)
             )
+        }
+    }
+    
+    private var isSelected: Bool {
+        selected == title
+    }
+    
+    private func selectTab() {
+        withAnimation(.spring) {
+            selected = title
         }
     }
 }
